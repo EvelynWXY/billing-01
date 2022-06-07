@@ -1,6 +1,5 @@
 <template>
     <Layout class-prefix="layout">
-        {{ record }}
         <NumberPad @update:value="onUpdateAmount" @submit="saveRecord" />
         <!-- <Types :value="record.type" @update:value="onUpdateType" /> -->
         <Types :value.sync="record.type" />
@@ -21,18 +20,33 @@ import Tags from "@/components/Money/Tags.vue";
 import Vue from "vue";
 import { Component, Watch } from 'vue-property-decorator';
 
+const version = window.localStorage.getItem('version') || '0';
+const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+
+if (version === '0.0.1') {
+    //数据库升级，数据迁移
+    recordList.forEach(record => {
+        record.createAt = new Date(2020, 0, 1);
+    })
+    //迁移后要保存数据
+    window.localStorage.setItem('recordList', JSON.stringify(recordList));
+}
+//把版本号置为 0.0.2
+window.localStorage.setItem('version', '0.0.2');
+
 type Record = {
     tags: string[], //字符串数组
     notes: string,
     type: string,
-    amount: number
+    amount: number, //数据类型 object ｜ string （类型是对所有数据的分类）
+    createAt?: Date, // 类 / 构造函数 （类是对 object 的分类）
 }
 
 @Component({
     components: { Layout, NumberPad, Types, Notes, Tags },
 })
 export default class Money extends Vue {
-    recordList: Record[] = [];
+    recordList: Record[] = recordList;
     tags = ['衣', '食', '住', '行'];
     record: Record = {
         tags: [], notes: '', type: '-', amount: 0
@@ -53,10 +67,9 @@ export default class Money extends Vue {
 
     }
     saveRecord() {
-        const record2 = JSON.parse(JSON.stringify(this.record));
+        const record2: Record = JSON.parse(JSON.stringify(this.record));
+        record2.createAt = new Date();
         this.recordList.push(record2);
-        console.log(this.recordList);
-
     }
     @Watch('recordList')
     onRecordListChange() {
