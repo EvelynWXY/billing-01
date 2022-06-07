@@ -11,7 +11,7 @@ import Types from '@/components/Money/Types.vue';
 <script lang="ts">
 import Vue from "vue";
 import { component } from "vue/types/umd";
-import { Component, Prop } from 'vue-property-decorator';
+import { Component, Prop, Watch } from 'vue-property-decorator';
 
 //TS 的好处
 //1. 类型提示：更智能的提示
@@ -19,14 +19,20 @@ import { Component, Prop } from 'vue-property-decorator';
 //3. 类型检查：无法点出错误的属性
 @Component
 export default class Types extends Vue {
-    type = '-' ////'-'表示支出 '+'表示收入
+    // type = '-' ////'-'表示支出 '+'表示收入
+    @Prop() readonly type!: string;//从外部传过来 type 的值
 
     selectType(type: string) {  // type 只能是 '+' 和 '-' 中的一个
         if (type !== '-' && type !== '+') {
             throw new Error('type is unknown')
         }
-        this.type = type;
+        this.$emit('update:value', type);
+        // this.type = type;
     }
+    // @Watch('type')
+    // onTypeChanged(value: string) {
+    //     this.$emit('update:value', value)
+    // }
 
 
 }
