@@ -1,4 +1,6 @@
 module.exports = {
+  "no-undef": "off",
+  globals: { RecordItem: true },
   root: true,
   env: {
     node: true,
@@ -20,11 +22,8 @@ module.exports = {
       files: [
         "**/__tests__/*.{j,t}s?(x)",
         "**/tests/unit/**/*.spec.{j,t}s?(x)",
-        "*.vue",
       ],
-      rules: {
-        "no-undef": "off",
-      },
+
       env: {
         jest: true,
       },
