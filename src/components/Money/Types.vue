@@ -55,6 +55,12 @@ export default class Types extends Vue {
         align-items: center;
         position: relative;
 
+        &.selected {
+            content: '';
+            background: darken($color: #f8f1bc, $amount: 20%);
+
+        }
+
         &.selected::after {
             content: '';
             position: absolute;
@@ -64,8 +70,8 @@ export default class Types extends Vue {
             height: 4px;
             // background: #333;
             // background: #37342d;
-            background: #c5bd89;
-
+            // background: #c5bd89
+            background: darken($color: #f8f1bc, $amount: 30%)
         }
     }
 }

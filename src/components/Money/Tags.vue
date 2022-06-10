@@ -47,6 +47,7 @@ export default class Tags extends Vue {
 
 <style lang="scss" scoped>
 .tags {
+    background: white;
     flex-grow: 1;
     font-size: 14px;
     padding: 16px;
@@ -57,7 +58,7 @@ export default class Tags extends Vue {
 
         display: flex;
         flex-wrap: wrap;
-        overflow: auto;
+        // overflow: auto;
 
         >li {
             // background: #9094ff;
