@@ -1,9 +1,9 @@
 <template>
     <div>
         <label class="notes">
-            <span class="name">备注</span>
+            <span class="name">{{ fieldName }}</span>
             <!-- <input type="text" :value="value" @input="onChange" placeholder="在这里输入备注"> -->
-            <input type="text" v-model="value" placeholder="在这里输入备注">
+            <input type="text" v-model="value" :placeholder="placeholder">
         </label>
 
     </div>
@@ -11,10 +11,13 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Component, Watch } from 'vue-property-decorator';
+import { Component, Prop, Watch } from 'vue-property-decorator';
 @Component
 export default class Notes extends Vue {
     value = ''
+
+    @Prop({ required: true }) fieldName!: string;
+    @Prop() placeholder?: string;
     // onChange(event: KeyboardEvent) {
     //     const input = event.target as HTMLInputElement;
     //     this.value = input.value;

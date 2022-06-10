@@ -3,7 +3,7 @@
         <NumberPad @update:value="onUpdateAmount" @submit="saveRecord" />
         <!-- <Types :value="record.type" @update:value="onUpdateType" /> -->
         <Types :value.sync="record.type" />
-        <Notes @update:value="onUpdateNotes" />
+        <Notes fieldName="备注" placeholder="在这里输入备注" @update:value="onUpdateNotes" />
         <!-- <Tags :dataSource="tags" v-on:update:dataSource="tags = $event" /> -->
         <!-- 可简化为： -->
         <!-- <Tags :dataSource.sync="tags" @xxx="onUpdateTags" /> -->
