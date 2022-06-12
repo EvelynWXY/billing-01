@@ -2,9 +2,7 @@
     <Layout>
         <div class="navBar">
 
-            <Icon class="leftIcon" name="money-box" />
-
-
+            <Icon class="leftIcon" name="right" />
             <span class="title">编辑标签</span>
             <span class="rightIcon"></span>
         </div>
@@ -24,7 +22,7 @@ import tagListModel from '@/models/tagListModel';
 import Vue from 'vue'
 import { Component } from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
-import Button from '../components/Button.vue';
+import Button from '@/components/Button.vue';
 
 @Component({
     components: { FormItem, Button }
@@ -57,7 +55,7 @@ export default class EditLabel extends Vue {
     justify-content: space-between;
     align-items: center;
 
-    >.title {}
+    // >.title {}
 
     >.leftIcon {
 
