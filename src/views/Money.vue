@@ -53,7 +53,6 @@ const tagList = tagListModel.fetch()
 })
 export default class Money extends Vue {
     recordList: RecordItem[] = recordList;
-    // tags = ['衣', '食', '住', '行'];
     tags = tagList;
     record: RecordItem = {
         tags: [], notes: '', type: '-', amount: 0
@@ -74,15 +73,12 @@ export default class Money extends Vue {
 
     }
     saveRecord() {
-        // const record2: RecordItem = JSON.parse(JSON.stringify(this.record));
-        const record2: RecordItem = recordListModel.clone(this.record);
-        record2.createAt = new Date();
-        this.recordList.push(record2);
+        recordListModel.create(this.record);
     }
     @Watch('recordList')
     onRecordListChange() {
         // window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
-        recordListModel.save(this.recordList);
+        recordListModel.save();
     }
 
 
