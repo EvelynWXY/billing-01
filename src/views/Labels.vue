@@ -18,12 +18,12 @@ import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
 
-tagListModel.fetch(); // 提前加载数据
+
 @Component({
     components: { Button }
 })
 export default class Labels extends Vue {
-    tags = tagListModel.data;
+    tags = window.tagList;
     createTag() {
         const name = window.prompt('请输入标签名')
         if (name) {
