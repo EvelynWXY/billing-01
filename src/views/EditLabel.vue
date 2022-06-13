@@ -22,13 +22,14 @@ import Vue from 'vue'
 import { Component } from 'vue-property-decorator';
 import FormItem from '@/components/Money/FormItem.vue';
 import Button from '@/components/Button.vue';
+import store from '@/store/index2';
 
 @Component({
     components: { FormItem, Button }
 })
 export default class EditLabel extends Vue {
 
-    tag = window.findTag(this.$route.params.id);//从路由拿到的id
+    tag = store.findTag(this.$route.params.id);//从路由拿到的id
 
     created() {
 
@@ -38,12 +39,12 @@ export default class EditLabel extends Vue {
     }
     update(name: string) {
         if (this.tag) {
-            window.updateTag(this.tag.id, name);
+            store.updateTag(this.tag.id, name);
         }
     }
     remove() {
         if (this.tag) {
-            if (window.removeTag(this.tag.id)) {
+            if (store.removeTag(this.tag.id)) {
                 this.$router.back();
             } else {
                 window.alert('删除失败');
