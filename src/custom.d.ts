@@ -1,3 +1,4 @@
+
 //xxx.d.ts 表示是自定义的类
 //全局使用的类型
 type RecordItem = {
@@ -28,4 +29,6 @@ interface Window {
     updateTag: (id: string, name: string) => 'success' | 'not found' | 'duplicated'
     //等价于
     // updateTag: TagListModel['update'];
+    recordList: RecordItem[];
+    createRecord: (record: RecordItem) => void;
 }
