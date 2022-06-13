@@ -25,8 +25,6 @@ import { Component } from 'vue-property-decorator';
 import store from "@/store/index2";
 
 
-
-
 // const version = window.localStorage.getItem('version') || '0';
 // const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
 // if (version === '0.0.1') {
