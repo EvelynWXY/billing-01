@@ -21,15 +21,16 @@ import { Component, Prop } from 'vue-property-decorator';
 @Component({
     computed: {
         tagList() {
-            //TODO
-            // return this.$store.fetchTags();
-            return []
+            return this.$store.state.tagList;
         }
     }
 })
 export default class Tags extends Vue {
 
     selectedTags: string[] = [];
+    created() {
+        this.$store.commit('fetchTags')
+    }
     toggle(tag: string) {
         const index = this.selectedTags.indexOf(tag)
         if (index >= 0) {
@@ -43,8 +44,8 @@ export default class Tags extends Vue {
     create() {
         const name = window.prompt('请输入标签名');
         if (!name) { return window.alert('标签名不能为空'); }
-        //TODO
-        // store.createTag(name);
+        this.$store.commit('createTag', name);
+
         //$emit 触发 update 更新 dataSource,并将第二个参数$event 传到 Money.vue 的Tags 里赋值给 tag 
         //[...this.dataSource, name] 则是展开 dataSource 并把 name 加进去
 
