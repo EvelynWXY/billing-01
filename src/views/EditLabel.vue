@@ -25,15 +25,16 @@ import Button from '@/components/Button.vue';
 
 
 @Component({
-    components: { FormItem, Button }
+    components: { FormItem, Button },
 })
 export default class EditLabel extends Vue {
-    tag?: Tag = undefined;//TODO
-    //TODO
-    // tag = store.findTag(this.$route.params.id);//从路由拿到的id
+    get tag() {
+        return this.$store.state.currentTag;
 
+    }
     created() {
-
+        const id = this.$route.params.id;
+        this.$store.commit('setCurrentTag', id);
         if (!this.tag) {
             this.$router.replace('/404');
         }
@@ -59,6 +60,7 @@ export default class EditLabel extends Vue {
     goBack() {
         this.$router.back();
     }
+
 }
 </script>
 
