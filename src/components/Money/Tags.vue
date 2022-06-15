@@ -33,15 +33,21 @@ export default class Tags extends mixins(TagHelper) {
         if (index >= 0) {
             this.selectedTags.splice(index, 1)
         } else {
-            this.selectedTags.push(tag);
+            if (this.selectedTags.length < 1) {
+                this.selectedTags.push(tag);
+            }
         }
         this.$emit('update:value', this.selectedTags);
+
+
 
     }
 }
 </script>
 
 <style lang="scss" scoped>
+@use "sass:math";
+
 .tags {
     background: white;
     flex-grow: 1;
@@ -65,7 +71,7 @@ export default class Tags extends mixins(TagHelper) {
             $h: 24px;
             height: $h;
             line-height: $h;
-            border-radius: $h/2;
+            border-radius: math.div($h, 2);
             padding: 0 16px;
             margin-right: 12px;
             margin-top: 4px;
