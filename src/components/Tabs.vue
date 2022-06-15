@@ -2,6 +2,10 @@
     <ul class="tabs" :class="{ [classPrefix + '-tabs']: classPrefix }">
         <li v-for="item in dataSource" :key="item.value" class="tabs-item" :class="liClass(item)" @click="select(item)">
             {{ item.text }}</li>
+        <!-- 用JS配置 height
+            <li v-for="item in dataSource" :key="item.value" class="tabs-item" :style="{ height: height }"
+            :class="liClass(item)" @click="select(item)">
+            {{ item.text }}</li> -->
 
     </ul>
 </template>
@@ -23,6 +27,9 @@ export default class Tabs extends Vue {
     readonly value!: string;//从外部传过来 type 的值 表示选中的是哪一项
     @Prop(String)
     classPrefix?: string;//表示 类 的前缀
+    // 用JS配置 height
+    @Prop({ type: String, default: '64px' })
+    height!: string;
 
 
     liClass(item: DataSourceItem) {
@@ -55,14 +62,6 @@ export default class Tabs extends Vue {
         justify-content: center;
         align-items: center;
         position: relative;
-
-
-        // &.selected {
-        //     content: '';
-        //     background: darken($color: #f8f1bc, $amount: 20%);
-        //     // background: #c5bd89;
-
-        // }
 
         &.selected::after {
             content: '';
