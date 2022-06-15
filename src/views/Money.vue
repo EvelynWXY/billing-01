@@ -45,14 +45,12 @@ import { Component } from 'vue-property-decorator';
 
 @Component({
     components: { NumberPad, Types, FormItem, Tags },
-    computed: {
-        recordList() {
-            return this.$store.state.recordList;//computed: 当 recordList 变化时会通知外面的 recordList
-        }
-    }
 })
 export default class Money extends Vue {
+    get recordList() {
+        return this.$store.state.recordList;//computed: 当 recordList 变化时会通知外面的 recordList
 
+    }
     record: RecordItem = {
         tags: [], notes: '', type: '-', amount: 0
     };
