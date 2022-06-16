@@ -8,7 +8,6 @@ type RootState = {
     currentTag?: Tag
 }
 type RecordItem = {
-    // tags: string[], //字符串数组
     tags: Tag[],
     notes: string,
     type: string,

@@ -55,6 +55,8 @@ export default class Tags extends mixins(TagHelper) {
     padding: 16px;
     display: flex;
     flex-direction: column-reverse;
+    color: #3d6ee3;
+
 
     >.current {
 
@@ -77,8 +79,12 @@ export default class Tags extends mixins(TagHelper) {
             margin-top: 4px;
 
             &.selected {
-                background: darken($color: $bg, $amount: 50%);
+                // background: darken($color: $bg, $amount: 50%);
+
+                background: #c2bdfe;
+
                 color: white;
+
             }
         }
     }

@@ -54,6 +54,8 @@ export default class Tabs extends Vue {
     display: flex;
     text-align: center;
     font-size: 24px;
+    color: #3d6ee3;
+
 
     &-item {
         width: 50%;
