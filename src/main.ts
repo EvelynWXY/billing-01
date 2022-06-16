@@ -18,6 +18,7 @@ Vue.component('Icon', Icon)
 
 
 
+
 new Vue({
   router, //相当于： router:router
   store,

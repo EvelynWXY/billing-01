@@ -6,11 +6,7 @@ import router from '../router/index';
 
 Vue.use(Vuex); //把 store 绑到 Vue.prototype 上 .$store = store
 
-type RootState = {
-  recordList: RecordItem[],
-  tagList: Tag[],
-  currentTag?: Tag
-}
+
 
 const store = new Vuex.Store({
   state: { //data
@@ -60,18 +56,18 @@ const store = new Vuex.Store({
     },
     fetchRecords(state) {
       state.recordList = JSON.parse(window.localStorage.getItem("recordList") || "[]") as RecordItem[];
+
     },
-    createRecord(state, record) {
+    createRecord(state, record: RecordItem) {
       const record2: RecordItem = clone(record);
-      record2.createAt = new Date();
+      record2.createAt = new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords');
-
-
+      // console.log('嘻嘻嘻');
     },
     saveRecords(state) {
       window.localStorage.setItem("recordList", JSON.stringify(state.recordList));
-      console.log('啊呜呜');
+
 
     },
     fetchTags(state) {

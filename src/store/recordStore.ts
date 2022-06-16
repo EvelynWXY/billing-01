@@ -14,9 +14,11 @@ const recordStore = {
     //record stores
     createRecord(record: RecordItem) {
         const record2: RecordItem = clone(record);
-        record2.createAt = new Date();
+        record2.createAt = new Date().toISOString();
         this.recordList?.push(record2); //可选链语法
         recordStore.saveRecords();
+        ;
+
     },
 
 
