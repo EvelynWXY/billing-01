@@ -6,7 +6,7 @@
         <!-- 用JS配置 height
             <Tabs classPrefix="interval" :dataSource="intervalList" :value.sync="interval" height="48px" /> -->
 
-        <ol>
+        <ol v-if="groupedList.length > 0">
 
             <li v-for="(group, index) in groupedList" :key="index">
 
@@ -30,7 +30,6 @@
 import Vue from 'vue';
 import { Component } from 'vue-property-decorator';
 import Tabs from '@/components/Tabs.vue';
-import intervalList from '@/constants/intervalList';
 import recordTypeList from '@/constants/recordTypeList';
 import dayjs from 'dayjs';
 import clone from '@/lib/clone';
@@ -41,7 +40,7 @@ import clone from '@/lib/clone';
 })
 export default class Statistics extends Vue {
     tagString(tags: Tag[]) {
-        return tags.length === 0 ? '无' : tags.join(',');
+        return tags.length === 0 ? '无' : tags.map(t => t.name).join(',');
     }
     beautify(string: string) {
         const now = dayjs();
@@ -64,7 +63,7 @@ export default class Statistics extends Vue {
     }
     get groupedList() {
         const { recordList } = this;
-        if (recordList.length === 0) { return []; }
+        if (recordList.length === 0) { return [] as Result; }
 
         const newList = clone(recordList)
             .filter(r => r.type === this.type)

@@ -4,11 +4,13 @@
         <!-- <Types :value.sync="record.type" /> -->
         <Tabs :dataSource="recordTypeList" :value.sync="record.type" />
         <div class="notes">
-            <FormItem fieldName="备注" placeholder="在这里输入备注" @update:value="onUpdateNotes" />
+            <!-- <FormItem fieldName="备注" placeholder="在这里输入备注" @update:value="onUpdateNotes" /> -->
+            <FormItem fieldName="备注" placeholder="在这里输入备注" :value.sync="record.notes" />
 
         </div>
 
-        <Tags />
+        <Tags @update:value="record.tags = $event" />
+
     </Layout>
 </template>
 
