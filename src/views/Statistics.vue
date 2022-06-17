@@ -21,6 +21,9 @@
             </li>
 
         </ol>
+        <div v-else class="noResult">
+            目前没有相关记录
+        </div>
     </Layout>
 </template>
 
@@ -63,11 +66,12 @@ export default class Statistics extends Vue {
     }
     get groupedList() {
         const { recordList } = this;
-        if (recordList.length === 0) { return [] as Result; }
 
         const newList = clone(recordList)
             .filter(r => r.type === this.type)
             .sort((a, b) => dayjs(b.createAt).valueOf() - dayjs(a.createAt).valueOf());
+        if (newList.length === 0) { return [] as Result; }
+
         type Result = { title: string, total?: number, items: RecordItem[] }[];
         const result: Result = [{ title: dayjs(newList[0].createAt).format('YYYY-MM-DD'), items: [newList[0]] }];
         for (let i = 1; i < newList.length; i++) {
@@ -97,6 +101,11 @@ export default class Statistics extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.noResult {
+    padding: 16px;
+    text-align: center;
+}
+
 ::v-deep {
     .type-tabs-item {
         // background: #f7f4bb;

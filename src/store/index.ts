@@ -11,6 +11,7 @@ Vue.use(Vuex); //把 store 绑到 Vue.prototype 上 .$store = store
 const store = new Vuex.Store({
   state: { //data
     recordList: [],
+    createRecordError: null,
     tagList: [],
     currentTag: undefined
   } as RootState,
@@ -63,16 +64,18 @@ const store = new Vuex.Store({
       record2.createAt = new Date().toISOString();
       state.recordList.push(record2);
       store.commit('saveRecords');
-      // console.log('嘻嘻嘻');
     },
     saveRecords(state) {
       window.localStorage.setItem("recordList", JSON.stringify(state.recordList));
-
-
     },
     fetchTags(state) {
       state.tagList = JSON.parse(window.localStorage.getItem("tagList") || "[]");
-
+      if (!state.tagList || state.tagList.length === 0) {
+        store.commit('createTag', '衣');
+        store.commit('createTag', '食');
+        store.commit('createTag', '住');
+        store.commit('createTag', '行');
+      }
     },
     createTag(state, name: string) {
       const names = state.tagList.map(item => item.name)
