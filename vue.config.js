@@ -1,6 +1,8 @@
 const path = require("path");
 
 module.exports = {
+  publicPath:
+    process.env.NODE_ENV === "production" ? "/billing-01-website/" : "/",
   lintOnSave: false,
   chainWebpack: (config) => {
     const dir = path.resolve(__dirname, "src/assets/icons"); //确定 icons 的位置
