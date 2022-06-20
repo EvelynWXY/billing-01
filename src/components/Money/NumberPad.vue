@@ -39,13 +39,17 @@ export default class NumberPad extends Vue {
         if (this.output === '0') {
             if ('0123456789'.indexOf(input) >= 0) {//input在"123456789"里的index
                 this.output = input;
+
             } else {
                 this.output += input;
+
+
             }
             return;
         }
         if (this.output.indexOf('.') >= 0 && input === '.') { return; }
         this.output += input;
+        this.output = this.output.replace(/^(\-)*(\d+)\.(\d\d).*$/, "$1$2.$3");
     }
     remove() {
         if (this.output.length === 1) {
