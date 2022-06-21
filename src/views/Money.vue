@@ -99,7 +99,17 @@ export default class Money extends Vue {
 }
 
 .notes {
-    padding: 12px 0;
+    padding: 3px 0 3px 0;
+    box-shadow: 0 0 3px lighten($color: #9094ff, $amount: 10%);
+    // border-bottom: 1px solid lighten($color: #9094ff, $amount: 10%);
+    // border-bottom: 1px solid red;
+}
+
+.createdAt {
+    padding: 3px 0 3px 0;
+    margin-top: 1px;
+    box-shadow: 0 0 3px #9094ff;
+
 }
 </style>
 
