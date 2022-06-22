@@ -3,6 +3,7 @@ import createId from '@/lib/createId';
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router/index';
+import dayjs from 'dayjs';
 
 Vue.use(Vuex); //把 store 绑到 Vue.prototype 上 .$store = store
 
@@ -63,8 +64,10 @@ const store = new Vuex.Store({
     createRecord(state, record: RecordItem) {
       const record2 = clone(record);
       record2.createAt = record2.createAt || new Date().toISOString();
+
       state.recordList.push(record2);
       store.commit('saveRecords');
+
     },
     saveRecords(state) {
       window.localStorage.setItem("recordList", JSON.stringify(state.recordList));
