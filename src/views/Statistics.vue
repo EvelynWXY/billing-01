@@ -3,7 +3,7 @@
     <Layout>
         <Tabs classPrefix="type" :dataSource="recordTypeList" :value.sync="type" />
         <div class="chart-wrapper" ref="chartWrapper">
-            <Chart class="chart" :options="x" />
+            <Chart class="chart" :options="chartOptions" />
 
         </div>
         <!-- 用JS配置 height
@@ -42,7 +42,7 @@ import clone from '@/lib/clone';
 import Chart from '@/components/Chart.vue';
 import _ from 'lodash';
 import day from 'dayjs';
-import func from 'vue-temp/vue-editor-bridge';
+
 
 
 
@@ -73,22 +73,22 @@ export default class Statistics extends Vue {
         }
 
     }
-    get y() {
+    get keyValueList() {
         const today = new Date();
         const array = [];
         for (let i = 0; i <= 29; i++) {
             const dateString = day(today).subtract(i, 'day').format('YYYY-MM-DD');
-            const found = _.find(this.recordList, {
-                createAt: dateString
+            const found = _.find(this.groupedList, {
+                title: dateString
             });
             array.push({
-                date: dateString, value: found ? found.amount : 0
+                key: dateString, value: found ? found.total : 0
             })
         }
         array.sort((a, b) => {
-            if (a.date > b.date) {
+            if (a.key > b.key) {
                 return 1;
-            } else if (a.date === b.date) {
+            } else if (a.key === b.key) {
                 return 0;
             } else {
                 return -1;
@@ -96,10 +96,13 @@ export default class Statistics extends Vue {
         })
         return array;
     }
-    get x() {
+    get chartOptions() {
+        console.log(this.recordList);
+        console.log(this.groupedList);
 
-        const keys = this.y.map(item => item.date);
-        const values = this.y.map(item => item.value);
+
+        const keys = this.keyValueList.map(item => item.key);
+        const values = this.keyValueList.map(item => item.value);
         return {
             grid: {
                 left: 0,
