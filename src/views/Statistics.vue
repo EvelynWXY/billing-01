@@ -100,7 +100,6 @@ export default class Statistics extends Vue {
         console.log(this.recordList);
         console.log(this.groupedList);
 
-
         const keys = this.keyValueList.map(item => item.key);
         const values = this.keyValueList.map(item => item.value);
         return {
