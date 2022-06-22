@@ -42,6 +42,7 @@ import clone from '@/lib/clone';
 import Chart from '@/components/Chart.vue';
 import _ from 'lodash';
 import day from 'dayjs';
+import func from 'vue-temp/vue-editor-bridge';
 
 
 
@@ -114,7 +115,14 @@ export default class Statistics extends Vue {
                     lineStyle: {
                         color: '#666'
                     }
+                },
+                axisLabel: {
+                    formatter: function (value: string, index: number) {
+                        return value.substr(5);
+                    },
+
                 }
+
             },
             yAxis: {
                 type: 'value',
